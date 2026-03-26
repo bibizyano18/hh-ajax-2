@@ -32,11 +32,17 @@ h1 {
   height: fit-content;
 }
 .free {
+  position: relative;
   background-color: lightgray;
   border: 1px solid black;
   width: 200px;
   height: 100px;
+  overflow: hidden;
 }
 .icon {
-  width: 60%;
+  width: 60px;
+  height: 60px;
+}
+.active {
+  opacity: 0.1;
 }
