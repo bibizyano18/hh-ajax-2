@@ -49,10 +49,12 @@ div_free.addEventListener('drop', (event) => {
 		draggedElement.style.left = `${x - (draggedElement.offsetWidth / 2)}px`;
 		draggedElement.style.top = `${y - (draggedElement.offsetHeight / 2)}px`;
 
-		iconCount++;
-		const newIcon = createNewIcon();
-		element.appendChild(newIcon);
-		addEvents(newIcon);
+		if (element.children.length === 0) {
+			iconCount++;
+			const newIcon = createNewIcon();
+			element.appendChild(newIcon);
+			addEvents(newIcon);
+		}
 	}
 	console.log('dropped on free');
 });
@@ -73,10 +75,12 @@ div_grid.addEventListener('drop', (event) => {
 
 		div_grid.appendChild(draggedElement);
 
-		iconCount++;
-		const newIcon = createNewIcon();
-		element.appendChild(newIcon);
-		addEvents(newIcon);
+		if (element.children.length === 0) {
+			iconCount++;
+			const newIcon = createNewIcon();
+			element.appendChild(newIcon);
+			addEvents(newIcon);
+		}
 	}
 	console.log('dropped on grid');
 });
