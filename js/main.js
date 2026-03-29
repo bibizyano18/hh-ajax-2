@@ -4,16 +4,15 @@ const element = document.querySelector('.element');
 const div_grid = document.querySelector('.grid');
 const div_free = document.querySelector('.free');
 
-const roots = ['assets/folder-svgrepo-com.svg', 'assets/plus-svgrepo-com.svg', 'assets/reload-svgrepo-com.svg']
+const colors = ['red', 'green', 'yellow'];
 
 function createNewIcon() {
-	const newIcon = document.createElement('img');
+	const newIcon = document.createElement('div');
 	const randomNumber = Math.floor(Math.random() * 3); // рандомное число от 0 до 2
-	newIcon.src = roots[randomNumber];
-	newIcon.alt = 'logo';
 	newIcon.className = 'icon';
 	newIcon.id = `icon-${iconCount}`;
 	newIcon.setAttribute('draggable', 'true');
+	newIcon.style.backgroundColor = colors[randomNumber];
 	return newIcon;
 }
 function addEvents(icon) {
