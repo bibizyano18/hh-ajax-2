@@ -1,6 +1,8 @@
 'use strict';
 let iconCount = 1;
 let isDragSuccessful = false;
+let clickX = 0;
+let clickY = 0;
 const element = document.querySelector('.element');
 const body = document.querySelector('body');
 const div_grid = document.querySelector('.grid');
@@ -21,14 +23,15 @@ function addEvents(icon) {
 	icon.addEventListener('dragstart', (event) => {
 		event.dataTransfer.dropEffect = 'move';
 		event.target.classList.add('active');
-		console.log('drag');
+		clickX = event.clientX - icon.getBoundingClientRect().left;
+		clickY = event.clientY - icon.getBoundingClientRect().top;
+		// console.log('drag');
 	});
-
 	icon.addEventListener('dragend', (event) => {
 		event.target.classList.remove('active');
 		if (!isDragSuccessful)
 			event.target.remove();
-		console.log('drop by user');
+		// console.log('drop by user');
 	});
 }
 
@@ -49,8 +52,8 @@ div_free.addEventListener('drop', (event) => {
 		div_free.appendChild(draggedElement);
 
 		draggedElement.style.position = 'absolute';
-		draggedElement.style.left = `${x - (draggedElement.offsetWidth / 2)}px`;
-		draggedElement.style.top = `${y - (draggedElement.offsetHeight / 2)}px`;
+		draggedElement.style.left = `${x - clickX}px`;
+		draggedElement.style.top = `${y - clickY}px`;
 
 		if (element.children.length === 0) {
 			isDragSuccessful = true;
@@ -60,7 +63,7 @@ div_free.addEventListener('drop', (event) => {
 			addEvents(newIcon);
 		}
 	}
-	console.log('dropped on free');
+	//console.log('dropped on free');
 });
 
 div_free.addEventListener('dragover', (event) => {
@@ -87,7 +90,7 @@ div_grid.addEventListener('drop', (event) => {
 			addEvents(newIcon);
 		}
 	}
-	console.log('dropped on grid');
+	//console.log('dropped on grid');
 });
 
 div_grid.addEventListener('dragover', (event) => {
