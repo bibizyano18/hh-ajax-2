@@ -12,3 +12,37 @@ body {
 h1 {
   margin-top: 0;
 }
+.element {
+  background-color: lightgray;
+  width: 150px;
+  height: 150px;
+  border: 1px solid black;
+  margin: 10px auto;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  background-color: lightgray;
+  border: 1px solid black;
+  min-width: 300px;
+  min-height: 100px;
+  height: fit-content;
+}
+.free {
+  position: relative;
+  background-color: lightgray;
+  border: 1px solid black;
+  width: 300px;
+  height: 350px;
+  overflow: hidden;
+}
+.icon {
+  width: 100px;
+  height: 100px;
+}
+.active {
+  opacity: 0.5;
+}
