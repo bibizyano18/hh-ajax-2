@@ -1,6 +1,8 @@
 'use strict';
 let iconCount = 1;
+let isDragSuccessful = false;
 const element = document.querySelector('.element');
+const body = document.querySelector('body');
 const div_grid = document.querySelector('.grid');
 const div_free = document.querySelector('.free');
 
@@ -24,6 +26,8 @@ function addEvents(icon) {
 
 	icon.addEventListener('dragend', (event) => {
 		event.target.classList.remove('active');
+		if (!isDragSuccessful)
+			event.target.remove();
 		console.log('drop by user');
 	});
 }
@@ -49,6 +53,7 @@ div_free.addEventListener('drop', (event) => {
 		draggedElement.style.top = `${y - (draggedElement.offsetHeight / 2)}px`;
 
 		if (element.children.length === 0) {
+			isDragSuccessful = true;
 			iconCount++;
 			const newIcon = createNewIcon();
 			element.appendChild(newIcon);
@@ -75,6 +80,7 @@ div_grid.addEventListener('drop', (event) => {
 		div_grid.appendChild(draggedElement);
 
 		if (element.children.length === 0) {
+			isDragSuccessful = true;
 			iconCount++;
 			const newIcon = createNewIcon();
 			element.appendChild(newIcon);
@@ -88,3 +94,13 @@ div_grid.addEventListener('dragover', (event) => {
 	event.preventDefault();
 	event.dataTransfer.dropEffect = "move";
 });
+
+body.addEventListener('drop', (event) => {
+	if (!div_free.contains(event.target) && !div_grid.contains(event.target)) {
+		event.preventDefault();
+		isDragSuccessful = false;
+	}
+})
+body.addEventListener('dragover', (event) => {
+	event.preventDefault();
+})
